@@ -1,0 +1,17 @@
+<%- include('partials/header'); %>
+
+
+    <h1>Home</h1>
+    <p><%= homeStartingContent %></p>
+    <br>
+
+
+
+<!-- Looping through posts array to printout the title and content -->
+<% posts.forEach(post =>{ %>
+      <h3><%=post.title%></h3>
+      <p><%=post.content.substr(0,100)+'...' %><a href="/post/<%=post.title %>"">Read More</a></p>
+<% }) %>
+
+
+<%- include('partials/footer'); %>
