@@ -10,6 +10,7 @@ const db = require('../db/db.js');
 //  ---------------  DB   ------------------
 const Post = db.Post;
 const Ingredient = db.Ingredient;
+const SellProduct = db.SellProduct;
 
 
 

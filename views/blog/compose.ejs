@@ -1,18 +1,76 @@
 <%-include('partials/header'); -%>
 
 <h1>Compose</h1>
-<form action="/compose" method="post">
+
+
+
+
+<form action="/blog/compose" method="post">
   <div class="form-group">
     <label class="form-label">Title</label>
     <br>
     <input class="form-control" type="text" name="postTitle">
     <br>
+
     <label class="form-label">Post</label>
     <br>
     <textarea class="form-control" id="w3review" name="postBody" rows="4" cols="50"></textarea>
+    <br>
+    <label class="form-label">Time to cook in minutes:</label>
+    <br>
+    <input class="form-control" type="number" name="prepare" placeholder="prepare">
+    <br>
+    <input class="form-control" type="number" name="cook" placeholder="cook">
+    <br>
   </div>
-  <button class="btn btn-primary" type="submit" name="button">Publish</button>
 
+
+
+  <% ingredients.forEach(item=>{ %>
+  <input type="hidden" name="product" value="<%=item.product%>">
+  <input type="hidden" name="amount" value="<%=item.amount%>">
+  <input type="hidden" name="measure" value="<%=item.measure%>">
+  <% }) %>
+  <button class="btn btn-primary" type="submit">Publish</button>
 </form>
+<br>
+
+<!---------------------- Data Entery -------------------->
+<div class="ingredients-box">
+
+    <% ingredients.forEach(item=>{ %>
+
+    <form action="/delete" method="post">
+      <div class="item">
+        <input  type="checkbox" name="checkbox"  onchange="this.form.submit()">
+        <!-- FIX => table -->
+        <p><%= item.product + " " +  item.amount + " " + item.measure %></p>
+      </div>
+
+    </form>
+    <% }) %>
+
+
+
+
+    <form class="item " action="/blog/update" method="post">
+      <input class="form-control" type="text" name="product" placeholder="New Ingredient" autocomplete="off">
+      <input class="form-control" type="number" name="amount" placeholder="amount" autocomplete="off">
+
+      <label for="measure">measure:</label>
+      <select class="form-control" name="measure" id="measure">
+        <option value="kg">Kg</option>
+        <option value="grm">grm</option>
+        <option value="litr">litr</option>
+        <option value="cc">cc</option>
+      </select>
+
+      <button class="btn btn-primary" type="submit">+</button>
+    </form>
+  </div>
+  <!-- -------------------------------------- -->
+
+
+
 
 <%-include('partials/footer'); -%>

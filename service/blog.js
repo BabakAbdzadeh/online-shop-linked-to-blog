@@ -5,6 +5,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 var _ = require('lodash');
+const db = require('../db/db.js');
+
+
+//  ---------------  DB   ------------------
+const Post = db.Post;
+const Ingredient = db.Ingredient;
+const SellProduct = db.SellProduct;
 
 
 // ------------------ lurespam Data -----------------
@@ -56,7 +63,7 @@ const postID = _.lowerCase(req.params.postID);
     const title = _.lowerCase(post.title);
     if(postID === title){
       console.log("Matched");
-      res.render('post', {
+      res.render('blog/post', {
         title: post.title,
         content:post.content,
       });
@@ -68,11 +75,14 @@ const postID = _.lowerCase(req.params.postID);
   });
 })
 
-
+var ingredients = [];
+var postData = [];
 
 
 blog.get("/compose", (req, res)=>{
-  res.render("blog/compose");
+  res.render("blog/compose", {
+    ingredients : ingredients
+  });
 })
 
 blog.post("/compose", (req, res)=>{
@@ -81,10 +91,65 @@ blog.post("/compose", (req, res)=>{
     title: req.body.postTitle,
     content: req.body.postBody
   }
+
+  // req.body.forEach(item => {
+  //   postData.push(item);
+  //   console.log(postData);
+
+  // });
+const commingData = Object.values(req.body);
+
+inputDataOrganizer(commingData);
+
+
+  // clearing the array
+  ingredients.length = 0;
+
   posts.push(post);
-  res.redirect('/');
+  res.redirect('/blog/');
+});
+
+blog.post("/update", (req, res)=>{
+
+  const ingredient = {
+    product : req.body.product,
+    amount: req.body.amount,
+    measure : req.body.measure
+  };
+  ingredients.push(ingredient);
+  res.redirect('/blog/compose');
 })
 
+
+function inputDataOrganizer(array){
+  const title = array.shift();
+const post = array.shift();
+
+const time = {
+  prepare : array.shift(),
+  cook : array.shift()
+}
+
+var length = array[0].length;
+console.log(length);
+
+
+const array2 =[];
+var temp = [];
+for(var j = 0; j<length; j++){
+  for(var i = 0; i< 3 ; i++){
+    temp.push(array[i][j]);
+  };
+    // using methods for clearnig temp need async-await-promise
+    array2.push(temp);
+    temp = [];
+
+
+};
+
+
+console.log(array2);
+};
 
 
 module.exports = blog;
