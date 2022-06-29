@@ -25,11 +25,58 @@ grocery.use(bodyParser.urlencoded({
 
 
 // --------- Routing -------------------
-grocery.route('/')
+
+grocery.route('/add')
 .get((req,res)=>{
   res.render('index')
+})
+.post((req ,res)=> {
+
+
+
+  const shopIngredient = new Ingredient({
+      product : req.body.product,
+      measure : req.body.measure,
+      amount : req.body.amount
+    });
+
+  shopIngredient.save();
+
+
+
+  const newSellProduct = new SellProduct({
+    brand : req.body.brand,
+    price : req.body.price,
+    expiration : req.body.expiration,
+    quantity : req.body.quantity,
+    ingredients : shopIngredient
+  });
+  newSellProduct.save();
+  console.log(newSellProduct);
+  res.redirect("/");
+
+
+
 });
 
+
+grocery.route('/')
+.get((req,res)=>{
+  SellProduct.find((err, results) =>{
+    if(!err){
+      res.render('homePage',{
+        items : results
+      });}
+  });
+})
+.post((req, res)=> {
+  const id = req.body.id;
+  //  alg:
+  //  search by id
+  // push to array
+  //  save id's to another array
+  // send back
+});
 
 
 

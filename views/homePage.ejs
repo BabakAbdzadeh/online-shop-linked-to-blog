@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Store!</title>
+</head>
+
+<body>
+
+
+  <body>
+    <table>
+      <tr>
+        <th>
+          <h1> Store! </h1>
+        </th>
+        <th>
+          <style>
+            .vl {
+              border-left: 6px solid ;
+              height: 50px;
+              margin-left: 50px;
+              margin-right: 50px;
+            }
+          </style>
+
+          <div class="vl"></div>
+        </th>
+        <th>
+          <h1> Basket: </h1>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <th>Services:</th>
+            </tr>
+            <tr>
+              <td>
+                <button type="button" name="button">
+                  <a href="/add">Add item</a>
+                </button>
+              </td>
+              <td>
+                <button type="button" name="button">
+                  <a href="/search">search</a>
+                </button>
+              </td>
+
+            </tr>
+          </table>
+        </td>
+        <td>
+          <style>
+            .vl {
+              border-left: 6px solid ;
+              height: 80px;
+              margin-left: 50px;
+              margin-right: 50px;
+            }
+          </style>
+
+          <div class="vl"></div>
+        </td>
+        <td>
+          <!-- This place gonna be for basket -->
+          <p>Test</p>
+        </td>
+      </tr>
+    </table>
+
+    <br><br>
+    <hr>
+
+    <% items.forEach(item => { %>
+    <table>
+      <tr>
+        <th>Product:</th>
+        <th>Brand:</th>
+        <th>Price:</th>
+      </tr>
+      <tr>
+        <td><%= item.ingredients.product%></td>
+        <td><%= item.brand %></td>
+        <td><%= item.price %></td>
+        <td>
+          <form  action="/" method="post">
+            <button type="submit" name="add">Add to basket</button>
+            <input type="hidden" name="id" value=`<%= item._id %>`>
+          </form>
+        </td>
+      </tr>
+
+    </table>
+    <hr>
+    <% }); %>
+
+
+
+
+
+
+  </body>
+
+</html>

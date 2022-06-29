@@ -123,7 +123,7 @@ blog.post("/update", (req, res)=>{
   res.redirect('/blog/compose');
 })
 
-
+//  extremly bad code!
 function inputDataOrganizer(array){
   const title = array.shift();
 const post = array.shift();
@@ -153,13 +153,13 @@ const arrayOfObject = [];
     console.log(array2);
     console.log(array2[0]);
     console.log(array2[0][0]);
-    const newIngredient = new Ingredient({
+    const postIngredient = new Ingredient({
       product : array2[k][0],
       measure: array2[k][2],
       amount: array2[k][1]
 
     });
-    newIngredient.save();
+    postIngredient.save();
     arrayOfObject.push(newIngredient);
     console.log(`Arrau of objects are: ${arrayOfObject}`);
   };

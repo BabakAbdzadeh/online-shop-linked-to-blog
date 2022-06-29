@@ -40,37 +40,49 @@
 
     <% ingredients.forEach(item=>{ %>
 
-    <form action="/delete" method="post">
+    <!-- <form action="/delete" method="post"> -->
       <div class="item">
-        <input  type="checkbox" name="checkbox"  onchange="this.form.submit()">
+        <!-- <input  type="checkbox" name="checkbox"  onchange="this.form.submit()"> -->
         <!-- FIX => table -->
         <p><%= item.product + " " +  item.amount + " " + item.measure %></p>
       </div>
 
-    </form>
+    <!-- </form> -->
     <% }) %>
 
 
 
 
-    <form class="item " action="/blog/update" method="post">
-      <input class="form-control" type="text" name="product" placeholder="New Ingredient" autocomplete="off">
-      <input class="form-control" type="number" name="amount" placeholder="amount" autocomplete="off">
+    <form  class="form-inline" action="/blog/update" method="post">
 
-      <label for="measure">measure:</label>
-      <select class="form-control" name="measure" id="measure">
-        <option value="kg">Kg</option>
-        <option value="grm">grm</option>
-        <option value="litr">litr</option>
-        <option value="cc">cc</option>
-      </select>
+
+              <input class="form-control" type="text" name="product" placeholder="New Ingredient" autocomplete="off">
+
+
+              <input class="form-control" type="number" name="amount" placeholder="amount" autocomplete="off">
+
+
+
+              <label for="measure">measure:</label>
+              <select class="form-control" name="measure" id="measure">
+                <option value="kg">Kg</option>
+                <option value="grm">grm</option>
+                <option value="litr">litr</option>
+                <option value="cc">cc</option>
+              </select>
+
+
+        </div>
+
 
       <button class="btn btn-primary" type="submit">+</button>
     </form>
   </div>
   <!-- -------------------------------------- -->
 
-
+<br>
+<br>
+<br>
 
 
 <%-include('partials/footer'); -%>
