@@ -97,6 +97,9 @@ blog.post("/compose", (req, res)=>{
   //   console.log(postData);
 
   // });
+
+  console.log(req.body);
+  console.log(Object.values(req.body));
 const commingData = Object.values(req.body);
 
 inputDataOrganizer(commingData);
@@ -125,10 +128,10 @@ function inputDataOrganizer(array){
   const title = array.shift();
 const post = array.shift();
 
-const time = {
-  prepare : array.shift(),
-  cook : array.shift()
-}
+
+  const prepare = array.shift();
+  const cook = array.shift();
+
 
 var length = array[0].length;
 console.log(length);
@@ -143,12 +146,32 @@ for(var j = 0; j<length; j++){
     // using methods for clearnig temp need async-await-promise
     array2.push(temp);
     temp = [];
-
-
 };
 
+const arrayOfObject = [];
+  for(var k = 0; k< array2.length; k++){
+    console.log(array2);
+    console.log(array2[0]);
+    console.log(array2[0][0]);
+    const newIngredient = new Ingredient({
+      product : array2[k][0],
+      measure: array2[k][2],
+      amount: array2[k][1]
 
-console.log(array2);
+    });
+    newIngredient.save();
+    arrayOfObject.push(newIngredient);
+    console.log(`Arrau of objects are: ${arrayOfObject}`);
+  };
+  const newPost = new Post({
+    name : title,
+    prepration : prepare,
+    cook : cook,
+    ingredients : arrayOfObject,
+    method: post
+  });
+newPost.save();
+
 };
 
 

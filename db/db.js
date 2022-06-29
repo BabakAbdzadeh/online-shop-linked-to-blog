@@ -7,22 +7,28 @@ const ingredientSchema = new mongoose.Schema({
   product : String,
   measure : String,
   amount : Number,
-  expiration : Date,
 });
 
+const sellProductSchema = new mongoose.Schema({
+  brand : String,
+  price : Number,
+  expiration : Date,
+  quantity : Number,
+  ingredients : ingredientSchema
+});
 
 const postSchema = new mongoose.Schema({
   name : String,
-  time :{
+  
     prepration: Number,
-    cook: Number
-  },
+    cook: Number,
+
   ingredients : [ingredientSchema],
   method: String
-
 });
 
 const Ingredient = mongoose.model('ingredient', ingredientSchema);
+const SellProduct = mongoose.model('sellProduct', sellProductSchema);
 const Post = mongoose.model('post', postSchema);
 
-module.exports = {Ingredient, Post};
+module.exports = {Ingredient, SellProduct, Post};
