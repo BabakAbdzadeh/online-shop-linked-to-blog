@@ -10,6 +10,7 @@
 
 
   <body>
+    <h1> This is BACK-END  you BITCH!</h1>
     <table>
       <tr>
         <th>
@@ -18,7 +19,7 @@
         <th>
           <style>
             .vl {
-              border-left: 6px solid ;
+              border-left: 6px solid;
               height: 50px;
               margin-left: 50px;
               margin-right: 50px;
@@ -55,7 +56,7 @@
         <td>
           <style>
             .vl {
-              border-left: 6px solid ;
+              border-left: 6px solid;
               height: 80px;
               margin-left: 50px;
               margin-right: 50px;
@@ -64,12 +65,69 @@
 
           <div class="vl"></div>
         </td>
+        <!-- nested table -->
         <td>
-          <!-- This place gonna be for basket -->
-          <p>Test</p>
-        </td>
+      <table>
+        <!-- This place gonna be for basket -->
+          <% basket.forEach(item=>{ %>
+            <tr>
+
+
+          <td>
+            <%=item.brand%>
+          </td>
+          <!-- line with css ! -->
+          <td>
+            <style>
+            .vl1 {
+              border-left: 2px solid;
+              height: 20px;
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+            </style>
+
+            <div class="vl1"></div>
+          </td>
+          <td>
+            <%=item.ingredients.product%>
+          </td>
+          <!-- line with css ! -->
+          <td>
+            <style>
+            .vl1 {
+              border-left: 2px solid;
+              height: 20px;
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+            </style>
+
+            <div class="vl1"></div>
+          </td>
+          <td>
+            <%=item.ingredients.amount + item.ingredients.measure%>
+          </td>
+          <!-- line with css ! -->
+          <td>
+            <style>
+            .vl1 {
+              border-left: 2px solid;
+              height: 20px;
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+            </style>
+
+            <div class="vl1"></div>
+          </td>
+          <td>
+            <%=item.price + "$"%>
+            <% }); %>
+          </td>
+      </table>
       </tr>
-    </table>
+    </table></td>
 
     <br><br>
     <hr>
@@ -86,21 +144,16 @@
         <td><%= item.brand %></td>
         <td><%= item.price %></td>
         <td>
-          <form  action="/" method="post">
-            <button type="submit" name="add">Add to basket</button>
-            <input type="hidden" name="id" value=`<%= item._id %>`>
+          <form action="/" method="post">
+            <button type="submit">Add to basket</button>
+            <input type="hidden" name="id" value=<%= item._id %>>
           </form>
         </td>
       </tr>
-
+    </tr>
     </table>
     <hr>
     <% }); %>
-
-
-
-
-
 
   </body>
 

@@ -23,6 +23,10 @@ grocery.use(bodyParser.urlencoded({
 }));
 
 
+//  define
+const basket = [];
+const idArrya = [];
+
 
 // --------- Routing -------------------
 
@@ -65,17 +69,25 @@ grocery.route('/')
   SellProduct.find((err, results) =>{
     if(!err){
       res.render('homePage',{
-        items : results
+        items : results,
+        basket : basket
       });}
   });
 })
 .post((req, res)=> {
   const id = req.body.id;
-  //  alg:
   //  search by id
-  // push to array
-  //  save id's to another array
-  // send back
+  SellProduct.findById(id, (err, result)=>{
+    if(!err){
+
+      basket.push(result);
+
+      idArrya.push(id);
+      res.redirect("/");
+    }
+  });
+  // alg: (2)
+  //
 });
 
 
